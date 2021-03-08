@@ -4,12 +4,13 @@ import random
 print("Welcome to the Hangman game, let's play (;")
 print("Guess the word or phrase\n")
 
-word = random.choice(palabras)
+def good_word(words):
+    word = random.choice(words)
+    while '-' in word or ' ' in word:
+        word = random.choice(words)
+    return word
 
-for i in word:
-    if i == "-":
-        print(" -",end=" ") #poner el guion en caso necesario
-    else:    
-        print(" _ ",end="")
+for i in good_word(palabras):
+    print(" _ ",end="")
 
 print("")
