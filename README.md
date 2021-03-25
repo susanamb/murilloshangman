@@ -1,12 +1,15 @@
 # Murillo's Hangman Code
 
-PASOS:
+STEPS:
 
-1. Bienvenida
-2. Tener listado de palabras
-3. Elegir una palabra (de un banco de datos X)
-4. Descartar en caso de que contenga '-' o ' '
-5. Mostrar los guones de diferentes colores
-6. Mostrar el monito de las vidas perdidas
+1. Welcome
+2. List of words
+3. Choose a word (from the data bank X)
+4. Dismiss in case it contains '-' o ' '
+5. Show the lines different colors each
+6. Show the hanging man
+7. Validate the input, just one letter
+8. Not lose a live if repeat the word
 
-Nota: Construir algoritmo con pasos, dividan el problema en subproblemas y resuelvan.
+Thanks 4 watching, I hope it works (;
+
