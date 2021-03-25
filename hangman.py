@@ -1,108 +1,59 @@
-from words import palabras
+from words import palabras,lives_pic
 import random
-import colorama #c
-from colorama import Fore,init#c
-init()#c
-colors = list(vars(colorama.Fore).values())#c lista de colores
-lives_pic = ['''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========''']
-lives = 0
+import colorama 
 
-def good_word(words):
+colors = list(vars(colorama.Fore).values())#list of colors
+lives = 0 #initialize lives
+def good_word(words): # choose a word
         word = random.choice(words)
         while '-' in word or ' ' in word:
             word = random.choice(words)
         return word
 
 print("\nWelcome to the Hangman game, let's play (;")
-word = good_word(palabras).upper()
-word_list = list(word) #separa las letras en una lista
-count_letters = len(word_list) #cantidad de letras a adivinar
+
+word_list = list(good_word(palabras).upper()) #set and split the words all uppercase
+count_letters = len(word_list) #letters to guess
 
 while count_letters > 0 or lives == 6:
     print("Guess the word or phrase")
 
-    print(word_list)
+    #print(word_list)
     for i in word_list:
         if i.isupper():
-            #print(" _ ",end="")
-            colored_chars = [random.choice(colors)+ " _ " ]#random color
-            print(" ".join(colored_chars),end="") #c 
-            
+            colored_chars = [random.choice(colors)+ " _ " ]#choose random color
+            print(" ".join(colored_chars),end="") #print the colored lines          
         else:
-            print(i,end="")
-
+            print(i,end="") #print the guessed letters
+    continue
     print("")
 
-    letter = input("\nLetter: ").upper()
-    if letter.isalpha() and len(letter) == 1:
-        con = 0
+    letter = input("\nLetter: ").upper() # INPUT
+    repeat_letter = True
+    if letter.isalpha() and len(letter) == 1: #validate the input
+        con = 0 #initialize guess counter
         for i in range(len(word_list)):          
-            if letter == word_list[i]:
+            if letter == word_list[i]: #if guess the letter
                 word_list[i] = letter.lower()
-                con = con + 1
-        if con == 0:
-            lives = lives + 1 
+                con = con + 1 # num of letters guessed
+            elif letter.lower() == word_list[i]: #repeat the letter
+                print("U already try with that one")
+                repeat_letter = False
+
+        if con == 0 and repeat_letter: #not guess and no repeat letter
+            lives = lives + 1 #lose a live
         else:                
             count_letters = count_letters - con #letra menos           
-            #print("Bien!, te faltan solo ",count_letters)
 
         print(lives_pic[lives])
-        if lives == 6:
+        if lives == 6: # if u run out of lives
             print("U lose!")
             break
             
-        if count_letters == 0:
+        if count_letters == 0: #if there's no more letters to guess
             print("Great! U WIN!")
-    else:
+            
+    else: #invalid input
         print("Invalid input, try again")  
         print("Remember, type only one letter")
 
