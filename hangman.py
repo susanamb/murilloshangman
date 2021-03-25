@@ -11,8 +11,8 @@ def good_word(words): # choose a word
         return word
 
 print("\nWelcome to the Hangman game, let's play (;")
-
-word_list = list(good_word(palabras).upper()) #set and split the words all uppercase
+word = good_word(palabras)
+word_list = list(word.upper()) #set and split the words all uppercase
 count_letters = len(word_list) #letters to guess
 
 while count_letters > 0 or lives == 6:
@@ -25,8 +25,7 @@ while count_letters > 0 or lives == 6:
             print(" ".join(colored_chars),end="") #print the colored lines          
         else:
             print(i,end="") #print the guessed letters
-    continue
-    print("")
+    print(colorama.Style.RESET_ALL + " ")
 
     letter = input("\nLetter: ").upper() # INPUT
     repeat_letter = True
@@ -47,11 +46,11 @@ while count_letters > 0 or lives == 6:
 
         print(lives_pic[lives])
         if lives == 6: # if u run out of lives
-            print("U lose!")
+            print("U lose! The word was: ", word)
             break
             
         if count_letters == 0: #if there's no more letters to guess
-            print("Great! U WIN!")
+            print(word, " Great! U WIN!")
             
     else: #invalid input
         print("Invalid input, try again")  
