@@ -14,11 +14,12 @@ print("\nWelcome to the Hangman game, let's play (;")
 word = good_word(palabras)
 word_list = list(word.upper()) #set and split the words all uppercase
 count_letters = len(word_list) #letters to guess
+used_letters = set()#used letters
 
 while count_letters > 0 or lives == 6:
     print("Guess the word or phrase")
-
-    #print(word_list)
+    print(used_letters)
+    print(word_list)
     for i in word_list:
         if i.isupper():
             colored_chars = [random.choice(colors)+ " _ " ]#choose random color
@@ -29,15 +30,18 @@ while count_letters > 0 or lives == 6:
 
     letter = input("\nLetter: ").upper() # INPUT
     repeat_letter = True
+    if letter in used_letters: #if the letter is repeated
+            print("U already try with that one")
+            repeat_letter = False
+
     if letter.isalpha() and len(letter) == 1: #validate the input
         con = 0 #initialize guess counter
+        used_letters.add(letter)
+        
         for i in range(len(word_list)):          
             if letter == word_list[i]: #if guess the letter
                 word_list[i] = letter.lower()
                 con = con + 1 # num of letters guessed
-            elif letter.lower() == word_list[i]: #repeat the letter
-                print("U already try with that one")
-                repeat_letter = False
 
         if con == 0 and repeat_letter: #not guess and no repeat letter
             lives = lives + 1 #lose a live
