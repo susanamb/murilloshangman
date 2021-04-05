@@ -10,6 +10,7 @@ STEPS:
 6. Show the hanging man
 7. Validate the input, just one letter
 8. Not lose a live if repeat the word
+9. Enjoy
 
 Thanks 4 watching, I hope it works (;
 
